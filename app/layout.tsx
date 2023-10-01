@@ -33,19 +33,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${spaceFrotesk.variable}`}>
-        <ClerkProvider
-          appearance={{
-            elements: {
-              formButtonPrimary: "primary-gradient",
-              footerActionLink: "primary-text-gradient hover:text-primary-500",
-            },
-          }}
-        >
+    <ClerkProvider
+      appearance={{
+        elements: {
+          formButtonPrimary: "primary-gradient",
+          footerActionLink: "primary-text-gradient hover:text-primary-500",
+        },
+      }}
+    >
+      <html lang="en">
+        <body className={`${inter.variable} ${spaceFrotesk.variable}`}>
           <ThemeProvider>{children}</ThemeProvider>
-        </ClerkProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
