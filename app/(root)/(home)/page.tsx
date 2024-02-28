@@ -8,47 +8,6 @@ import { HomePageFilters } from "@/constants/filters";
 import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
-// const questions = [
-//   {
-//     _id: "1",
-//     title: "Cascading Deletes in SQLAlchemy?",
-//     tags: [
-//       { _id: "1", name: "Python" },
-//       { _id: "2", name: "SQL" },
-//     ],
-//     author: {
-//       _id: "1",
-//       name: "John Smith",
-//       picture: "url_to_picture",
-//       clerkId: "clerk_id_here",
-//     },
-//     upvotes: ["user_id_1", "user_id_2"],
-//     views: 100,
-//     answers: [
-//       { answerId: "1", text: "Sample answer" },
-//       { answerId: "2", text: "Another sample answer" },
-//     ],
-//     createdAt: new Date("2023-07-01T00:00:00"),
-//   },
-//   {
-//     _id: "2",
-//     title: "How do I use express as a custom server in NextJS?",
-//     tags: [
-//       { _id: "1", name: "Next13" },
-//     ],
-//     author: {
-//       _id: "2",
-//       name: "Jane Doe",
-//       picture: "url_to_picture",
-//       clerkId: "clerk_id_here",
-//     },
-//     upvotes: ["user_id_1", "user_id_2"],
-//     views: 150,
-//     answers: [{ answerId: "1", text: "Sample answer" }],
-//     createdAt: new Date("2023-07-01T00:00:00"),
-//   },
-// ];
-
 export default async function Home() {
   const result = await getQuestions({});
   // console.log(result.questions);

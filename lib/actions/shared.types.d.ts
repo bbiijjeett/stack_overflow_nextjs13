@@ -51,6 +51,8 @@ export interface JobFilterParams {
   page: string;
 }
 
+export interface GetQuestions {}
+
 export interface GetQuestionsParams {
   page?: number;
   pageSize?: number;
