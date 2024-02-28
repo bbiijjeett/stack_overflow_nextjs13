@@ -35,7 +35,6 @@ import Link from "next/link";
 //     title: "How do I use express as a custom server in NextJS?",
 //     tags: [
 //       { _id: "1", name: "Next13" },
-//       { _id: "2", name: "Express" },
 //     ],
 //     author: {
 //       _id: "2",
