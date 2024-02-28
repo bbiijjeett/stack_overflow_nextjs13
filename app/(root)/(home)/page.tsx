@@ -5,51 +5,55 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
-const questions = [
-  {
-    _id: "1",
-    title: "Cascading Deletes in SQLAlchemy?",
-    tags: [
-      { _id: "1", name: "Python" },
-      { _id: "2", name: "SQL" },
-    ],
-    author: {
-      _id: "1",
-      name: "John Smith",
-      picture: "url_to_picture",
-      clerkId: "clerk_id_here",
-    },
-    upvotes: ["user_id_1", "user_id_2"],
-    views: 100,
-    answers: [
-      { answerId: "1", text: "Sample answer" },
-      { answerId: "2", text: "Another sample answer" },
-    ],
-    createdAt: new Date("2023-07-01T00:00:00"),
-  },
-  {
-    _id: "2",
-    title: "How do I use express as a custom server in NextJS?",
-    tags: [
-      { _id: "1", name: "Next13" },
-      { _id: "2", name: "Express" },
-    ],
-    author: {
-      _id: "2",
-      name: "Jane Doe",
-      picture: "url_to_picture",
-      clerkId: "clerk_id_here",
-    },
-    upvotes: ["user_id_1", "user_id_2"],
-    views: 150,
-    answers: [{ answerId: "1", text: "Sample answer" }],
-    createdAt: new Date("2023-07-01T00:00:00"),
-  },
-];
+// const questions = [
+//   {
+//     _id: "1",
+//     title: "Cascading Deletes in SQLAlchemy?",
+//     tags: [
+//       { _id: "1", name: "Python" },
+//       { _id: "2", name: "SQL" },
+//     ],
+//     author: {
+//       _id: "1",
+//       name: "John Smith",
+//       picture: "url_to_picture",
+//       clerkId: "clerk_id_here",
+//     },
+//     upvotes: ["user_id_1", "user_id_2"],
+//     views: 100,
+//     answers: [
+//       { answerId: "1", text: "Sample answer" },
+//       { answerId: "2", text: "Another sample answer" },
+//     ],
+//     createdAt: new Date("2023-07-01T00:00:00"),
+//   },
+//   {
+//     _id: "2",
+//     title: "How do I use express as a custom server in NextJS?",
+//     tags: [
+//       { _id: "1", name: "Next13" },
+//       { _id: "2", name: "Express" },
+//     ],
+//     author: {
+//       _id: "2",
+//       name: "Jane Doe",
+//       picture: "url_to_picture",
+//       clerkId: "clerk_id_here",
+//     },
+//     upvotes: ["user_id_1", "user_id_2"],
+//     views: 150,
+//     answers: [{ answerId: "1", text: "Sample answer" }],
+//     createdAt: new Date("2023-07-01T00:00:00"),
+//   },
+// ];
 
-export default function Home() {
+export default async function Home() {
+  const result = await getQuestions({});
+  console.log(result.questions);
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -80,8 +84,8 @@ export default function Home() {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {/* Looping through questions */}
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
