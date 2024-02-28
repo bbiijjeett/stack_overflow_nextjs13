@@ -1,20 +1,18 @@
 "use server";
 
 import Question from "@/database/question.model";
-import { connectToDatabase } from "../mongoose";
 import Tag from "@/database/tag.model";
-import { CreateQuestionParams, GetQuestions } from "./shared.types";
+import { connectToDatabase } from "../mongoose";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
 import User from "@/database/user.model";
 import { revalidatePath } from "next/cache";
 
-export async function getQuestions(params: GetQuestions) {
+export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
+
     const questions = await Question.find({})
-      .populate({
-        path: "tags",
-        model: Tag,
-      })
+      .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
       .sort({ createdAt: -1 });
 
@@ -28,6 +26,7 @@ export async function getQuestions(params: GetQuestions) {
 export async function createQuestion(params: CreateQuestionParams) {
   try {
     connectToDatabase();
+
     const { title, content, tags, author, path } = params;
 
     // Create the question
@@ -43,7 +42,7 @@ export async function createQuestion(params: CreateQuestionParams) {
     for (const tag of tags) {
       const existingTag = await Tag.findOneAndUpdate(
         { name: { $regex: new RegExp(`^${tag}$`, "i") } },
-        { $setOnInsert: { name: tag }, $push: { questions: question._id } },
+        { $setOnInsert: { name: tag }, $push: { question: question._id } },
         { upsert: true, new: true }
       );
 
@@ -57,9 +56,7 @@ export async function createQuestion(params: CreateQuestionParams) {
     // Create an interaction record for the user's ask_question action
 
     // Increment author's reputation by +5 for creating a question
+
     revalidatePath(path);
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+  } catch (error) {}
 }

@@ -10,12 +10,12 @@ import Link from "next/link";
 
 export default async function Home() {
   const result = await getQuestions({});
-  // console.log(result.questions);
 
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="h1-bold text-dark100_light900">All Questions</h1>
+
         <Link href="/ask-question" className="flex justify-end max-sm:w-full">
           <Button className="primary-gradient !text-light-900 min-h-[46px] px-4 py-3">
             Ask a Question
@@ -31,6 +31,7 @@ export default async function Home() {
           placeholder="Search for questions"
           otherClasses="flex-1"
         />
+
         <Filter
           filters={HomePageFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
@@ -41,7 +42,6 @@ export default async function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {/* Looping through questions */}
         {result.questions.length > 0 ? (
           result.questions.map((question) => (
             <QuestionCard
@@ -58,10 +58,8 @@ export default async function Home() {
           ))
         ) : (
           <NoResult
-            title="There&aposs no question to show"
-            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the
-          discussion. our query could be the next big thing others learn from. Get
-          involved! 💡"
+            title="There’s no question to show"
+            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. our query could be the next big thing others learn from. Get involved! 💡"
             link="/ask-question"
             linkTitle="Ask a Question"
           />
