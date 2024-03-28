@@ -20,6 +20,7 @@ import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
 import { usePathname, useRouter } from "next/navigation";
+import { useTheme } from "@/context/ThemeProvider";
 
 const type: any = "create";
 
@@ -28,6 +29,7 @@ interface Props {
 }
 
 const Question = ({ mongoUserId }: Props) => {
+  const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -113,7 +115,7 @@ const Question = ({ mongoUserId }: Props) => {
                   {...field}
                 />
               </FormControl>
-              <FormDescription className="body-regular text-light-500 mt-2.5">
+              <FormDescription className="body-regular mt-2.5 text-light-500">
                 Be specific & imagine you&apos;re asking a question to another
                 person.
               </FormDescription>
@@ -166,10 +168,12 @@ const Question = ({ mongoUserId }: Props) => {
                       "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist",
                     content_style: "body { font-family:Inter; font-size:16px }",
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>
-              <FormDescription className="body-regular text-light-500 mt-2.5">
+              <FormDescription className="body-regular mt-2.5 text-light-500">
                 Introduce the problem and expand on what you put in the title.
                 Minimum 20 characters.
               </FormDescription>
@@ -215,7 +219,7 @@ const Question = ({ mongoUserId }: Props) => {
                   )}
                 </>
               </FormControl>
-              <FormDescription className="body-regular text-light-500 mt-2.5">
+              <FormDescription className="body-regular mt-2.5 text-light-500">
                 Add up to 3 tags to describe what your question is about. You
                 need to press enter to add a tag.
               </FormDescription>
@@ -225,7 +229,7 @@ const Question = ({ mongoUserId }: Props) => {
         />
         <Button
           type="submit"
-          className="primary-gradient !text-light-900 w-fit"
+          className="primary-gradient w-fit !text-light-900"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
