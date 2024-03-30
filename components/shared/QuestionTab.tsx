@@ -5,6 +5,7 @@ import QuestionCard from "../cards/QuestionCard";
 import { SearchParamsProps } from "@/types";
 
 interface Props extends SearchParamsProps {
+  searchProps: SearchParamsProps;
   userId: string;
   clerkId?: string | null;
 }
