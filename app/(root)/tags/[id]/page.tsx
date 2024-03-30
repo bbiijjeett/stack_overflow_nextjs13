@@ -34,9 +34,9 @@ const Page = async ({ params, searchParams }: URLProps) => {
               key={question._id}
               _id={question._id}
               title={question.title}
-              tags={question.tags}
-              author={question.author}
-              upvotes={question.upvotes}
+              tags={question.tags as any}
+              author={question.author as any}
+              upvotes={question.upvotes as any}
               views={question.views}
               answers={question.answers}
               createdAt={question.createdAt}
