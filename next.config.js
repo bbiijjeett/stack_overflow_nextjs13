@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
-    serverActions: true,
+    // serverActions: true,
     mdxRs: true,
     serverComponentsExternalPackages: ["mongoose"],
   },
